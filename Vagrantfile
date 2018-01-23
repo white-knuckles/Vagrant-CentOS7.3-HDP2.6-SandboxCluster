@@ -3,7 +3,7 @@
 
 Vagrant.configure("2") do |config|
     config.vm.box = "parallels/centos-7.3"
-    config.vm.box_check_update = true
+    config.vm.box_check_update = false
 
     # workaround for known issue #2 https://seven.centos.org/2016/12/updated-centos-vagrant-images-available-v1611-01/
     config.vm.synced_folder ".", "/hdpdata"
@@ -14,7 +14,8 @@ Vagrant.configure("2") do |config|
     # configure parallels VM provider to share with all VM's
     config.vm.provider "parallels" do |prl|
       prl.linked_clone = true
-      prl.update_guest_tools = false
+      # prl.check_guest_tools = true
+      # prl.update_guest_tools = true
       prl.customize [ "set", :id, "--on-window-close", "keep-running" ]
     end
 
